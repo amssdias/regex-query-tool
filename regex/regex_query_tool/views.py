@@ -1,13 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+import re
 
 # Create your views here.
 def regex(request):
     if request.method == "POST":
-        print(request.POST['text'])
-        print(request.POST['regex_text'])
+        text = request.POST['text']
+        expression = request.POST['regex_text']
+        matched = re.findall(expression, text)
 
-        return HttpResponseRedirect(reverse("regex"))
+        context = {"matched": matched, "text":text, "expression": expression}
+        return render(request, "regex_query/index.html", context=context)
 
     return render(request, "regex_query/index.html")

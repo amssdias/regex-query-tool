@@ -16,12 +16,12 @@
         <form action="" method="POST">
             {% csrf_token %}
             <div class="form-floating my-5">
-                <textarea name="text" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                <textarea name="text" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px">{{ text }}</textarea>
                 <label for="floatingTextarea2">Insert text here</label>
             </div>
     
             <div class="form-floating">
-                <textarea name="regex_text" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                <textarea name="regex_text" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px">{{ expression }}</textarea>
                 <label for="floatingTextarea2">Regex here</label>
             </div>
 
@@ -30,6 +30,16 @@
             </p>
 
         </form>
+
+        {% if matched %}
+            <ul>
+                {% for match in matched %}
+
+                    <li>{{ match }}</li>
+
+                {% endfor %}
+            </ul>
+        {% endif %}
 
         
     
