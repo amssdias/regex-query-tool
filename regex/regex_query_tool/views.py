@@ -1,16 +1,32 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+
+from .forms import RegexForm
 import re
 
 # Create your views here.
 def regex(request):
+
+    form = RegexForm()
+
     if request.method == "POST":
-        text = request.POST['text']
-        expression = request.POST['regex_text']
-        matched = re.findall(expression, text)
 
-        context = {"matched": matched, "text":text, "expression": expression}
-        return render(request, "regex_query/index.html", context=context)
+        form = RegexForm(request.POST)
 
-    return render(request, "regex_query/index.html")
+        if form.is_valid():
+            text = form.cleaned_data['text']
+            expression = form.cleaned_data['regex_text']
+
+            try:
+                matched = re.findall(expression, text)
+            except:
+                error = "Expression not valid"
+                context = {"form":form, "error": error}
+                return render(request, "regex_query/index.html", context=context)
+            else:
+                context = {"matched": matched, "form":form}
+                return render(request, "regex_query/index.html", context=context)
+
+
+    return render(request, "regex_query/index.html", context={"form": form})

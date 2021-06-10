@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,27 +8,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="{% static 'regex_query_tool/css/style.css' %}">
+    
     <title>Regex Query Tool</title>
 </head>
 <body>
+    <div class="header">
+
+        <h1 class="py-4 d-flex flex-column align-items-center">Regex query tool</h1>
+    </div>
+
     <div class="container">
 
-        <h1 class="mt-5 d-flex flex-column align-items-center">Regex query tool</h1>
 
         <form action="" method="POST">
             {% csrf_token %}
+
+
             <div class="form-floating my-5">
-                <textarea name="text" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px">{{ text }}</textarea>
-                <label for="floatingTextarea2">Insert text here</label>
+
+                {{ form.text }}
+                {{ form.text.label_tag }}
+                <!-- <textarea name="text" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2">{{ text }}</textarea>
+                <label for="floatingTextarea2">Insert text here</label> -->
+
             </div>
     
+            
             <div class="form-floating">
-                <textarea name="regex_text" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px">{{ expression }}</textarea>
-                <label for="floatingTextarea2">Regex here</label>
+
+                {{ form.regex_text }}
+                {{ form.regex_text.label_tag }}
+
+                <!-- <textarea name="regex_text" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2">{{ expression }}</textarea>
+                <label for="floatingTextarea2">Regex here</label> -->
+
+
+                {% if error %}
+                    <p class="error"> {{ error }}</p>
+
+                {% endif %}
             </div>
 
             <p class="text-center mt-4">
-                <button type="submit" class="btn btn-info">Check</button>
+                <button type="submit" class="btn btn-dark">Check</button>
             </p>
 
         </form>
@@ -40,7 +66,11 @@
                 {% endfor %}
             </ul>
         {% endif %}
+        
+        <!-- <div class="form-floating">
+            {{form }}
 
+        </div> -->
         
     
     </div>
