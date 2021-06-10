@@ -8,7 +8,7 @@
 # Regex Query Tool
 
 <p align="center">
-    <img src="media/website.png" width="500px">
+    <img src="media/website.png" width="900px">
 </p>
 A simple app where a user can query through a text using regular expressions.
 
