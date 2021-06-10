@@ -5,7 +5,7 @@ from django.urls import reverse
 from .forms import RegexForm
 import re
 
-# Create your views here.
+
 def regex(request):
 
     form = RegexForm()
@@ -15,15 +15,17 @@ def regex(request):
         form = RegexForm(request.POST)
 
         if form.is_valid():
-            text = form.cleaned_data['text']
-            expression = form.cleaned_data['regex_text']
-
+            text        = form.cleaned_data.get('text')
+            expression  = form.cleaned_data.get('regex_text')
+            
             try:
                 matched = re.findall(expression, text)
+
             except:
-                error = "Expression not valid"
+                error   = "Expression not valid"
                 context = {"form":form, "error": error}
                 return render(request, "regex_query/index.html", context=context)
+
             else:
                 context = {"matched": matched, "form":form}
                 return render(request, "regex_query/index.html", context=context)

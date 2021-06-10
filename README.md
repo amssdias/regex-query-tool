@@ -28,8 +28,7 @@ A simple app where a user can query through a text using regular expressions.
 ### Installation
 
 #### Pipfile and Pipfile.Lock
-
-Inside the Pipfile there's all the modules name needed for the project. 
+ 
 
 1. Download Pipenv through the terminal window ***(make sure you have [Python][python-download] installed)***:
 
@@ -53,8 +52,6 @@ Inside the Pipfile there's all the modules name needed for the project.
 
 If any doubts here's a link to some more explanations: [Pipenv](https://pipenv-fork.readthedocs.io/en/latest/basics.html)
 
-
-### 
 
 
 ## :mag_right: Use the query tool
